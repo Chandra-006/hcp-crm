@@ -46,8 +46,66 @@ uvicorn app.main:app --reload
 3. Frontend Setup
 Navigate to the frontend directory:
 
-Bash
+```bash
 cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm start
+```
+
+The frontend will run on [http://localhost:3000](http://localhost:3000).
+
+## 🚀 Usage
+
+1. **Start the Backend:** Ensure the FastAPI server is running (`uvicorn app.main:app --reload`).
+2. **Start the Frontend:** Run `npm start` in the frontend directory.
+3. **Interact with the AI:** Describe your HCP meeting in natural language in the chat on the right. The AI will extract details and automatically fill the form on the left.
+4. **Tools Available:**
+   - Log new interactions
+   - Edit existing records
+   - Retrieve interaction history
+   - Schedule follow-ups
+   - Get product information
+
+## 📡 API Endpoints
+
+- `GET /`: Health check
+- `POST /api/chat`: Send a message to the AI assistant
+
+## 🧪 Testing
+
+### Backend Tests
+```bash
+cd backend
+pytest
+```
+
+### Frontend Tests
+```bash
+cd frontend
+npm test
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
 Install dependencies:
 
 Bash

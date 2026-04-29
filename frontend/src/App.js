@@ -2,6 +2,12 @@ import React from 'react';
 import InteractionForm from './components/InteractionForm';
 import ChatAssistant from './components/ChatAssistant';
 
+/**
+ * Main App component for the HCP CRM interface.
+ *
+ * Renders a split-screen layout with the interaction form on the left
+ * and the AI chat assistant on the right.
+ */
 function App() {
   return (
     <div style={{ display: 'flex', height: '100vh', fontFamily: 'sans-serif' }}>

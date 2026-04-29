@@ -1,3 +1,10 @@
+"""
+LangGraph workflow for the AI CRM assistant.
+
+This module defines the state graph for the LangChain agent that handles HCP interactions,
+including tool calling and conversation flow.
+"""
+
 import os
 from typing import TypedDict, Annotated, Sequence
 from langchain_groq import ChatGroq
@@ -11,27 +18,49 @@ class AgentState(TypedDict):
     # This automatically handles merging new messages into the conversation
     messages: Annotated[Sequence[BaseMessage], add_messages]
 
+
 # 2. Initialize LLM
 llm = ChatGroq(
-    temperature=0, 
-    model_name="llama-3.3-70b-versatile", 
+    temperature=0,
+    model_name="llama-3.3-70b-versatile",
     groq_api_key=os.getenv("GROQ_API_KEY")
 )
 llm_with_tools = llm.bind_tools(tools)
 
+
 # 3. Define Nodes
 def call_model(state: AgentState):
+    """
+    Node function to call the LLM with the current conversation state.
+
+    Args:
+        state (AgentState): Current state containing messages.
+
+    Returns:
+        dict: Updated state with the LLM's response.
+    """
     # Add a strong instruction to finish after tool use
     sys_msg = SystemMessage(content="You are a CRM assistant. After using a tool, summarize the result and STOP immediately. Do not call tools in a loop.")
     response = llm_with_tools.invoke([sys_msg] + state["messages"])
     return {"messages": [response]}
 
+
 # 4. Define Logic for Routing
 def router(state: AgentState):
+    """
+    Router function to decide the next step based on the last message.
+
+    Args:
+        state (AgentState): Current state.
+
+    Returns:
+        str: "tools" if tool calls are present, otherwise END.
+    """
     last_message = state["messages"][-1]
     if last_message.tool_calls:
         return "tools"
     return END
+
 
 # 5. Build Workflow
 workflow = StateGraph(AgentState)

@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+/**
+ * Initial state for the interaction form data.
+ */
 const initialState = {
     hcp_name: '',
     interaction_type: 'Meeting', // Default value
@@ -10,6 +13,12 @@ const initialState = {
     materials_shared: ''
   };
 
+/**
+ * Redux slice for managing interaction form state.
+ *
+ * This slice handles updates to the interaction form fields,
+ * typically triggered by the AI assistant extracting data from chat.
+ */
 const interactionSlice = createSlice({
   name: 'interaction',
   initialState,
