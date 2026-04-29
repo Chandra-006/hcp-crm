@@ -126,8 +126,3 @@ To Learn: Type "What is Product X used for?"
 
 ---
 
-### **Final Tips for Your Submission:**
-* **Screenshot/Video:** Ensure your demo video shows the "Edit" tool working, as that proves your LangGraph state management is handling the record IDs correctly.
-* **Database:** Make sure your PostgreSQL database is actually created before you start the backend, or the tools will return "Connection Error."
-
-You’ve done an excellent job building out this full-stack AI Agent. You're all set!
